@@ -8,8 +8,8 @@ export function About() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="About"
-          title="Early in my career, serious about the craft"
-          description="No inflated titles, no invented numbers — just documented work and steady progress."
+          title="Entry-level, practical and still learning"
+          description="Practical learning, continuous improvement and using the right digital tools to create useful marketing solutions."
         />
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
@@ -20,8 +20,8 @@ export function About() {
               </p>
             ))}
             <p className="text-sm text-muted-foreground">
-              Currently based in {profile.location}. Available for entry-level roles, internships
-              and small freelance projects.
+              Based in {profile.location}. Open to entry-level roles, internships and freelance
+              website or marketing projects.
             </p>
           </Reveal>
 

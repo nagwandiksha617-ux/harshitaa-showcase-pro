@@ -1,66 +1,68 @@
 // ============================================================
-// EDIT ME: All portfolio content lives here.
-// Placeholders are marked with "REPLACE:" — swap in real values.
+// All portfolio content lives here. Items marked EDITABLE are
+// intentional placeholders to be filled in later.
 // ============================================================
 
 export const profile = {
   name: "Harshitaa Sharma",
   role: "Digital Marketing Professional",
   tagline:
-    "Entry-level digital marketer with hands-on project experience and an ongoing internship — focused on SEO, social media and content that is measured, not guessed.",
-  location: "REPLACE: City, Country",
-  email: "REPLACE: your.email@example.com",
-  phone: "REPLACE: +91 00000 00000",
-  // REPLACE: drop your photo in src/assets and import it, or paste a URL here.
-  photo: "",
-  resumeUrl: "#", // REPLACE: link to your resume PDF
+    "Entry-level digital marketing professional with practical experience in website development, SEO, Google Ads, Meta Ads, social media marketing, content creation, analytics and AI-assisted marketing workflows.",
+  location: "Jaipur, Rajasthan, India",
+  email: "", // EDITABLE: add email address
+  phone: "", // EDITABLE: add phone number
+  photo: "", // EDITABLE: add profile photo
+  resumeUrl: "", // EDITABLE: add resume PDF link
   socials: [
-    { label: "LinkedIn", href: "#" }, // REPLACE
-    { label: "Instagram", href: "#" }, // REPLACE
-    { label: "GitHub", href: "#" }, // REPLACE
+    { label: "LinkedIn", href: "" }, // EDITABLE
+    { label: "Instagram", href: "" }, // EDITABLE
   ],
 };
 
 export const about = {
   intro: [
-    "I'm an early-career digital marketing professional building practical skills through self-driven projects and an ongoing internship. I like the parts of marketing where creativity meets measurement — writing copy that sounds human, then checking whether it actually worked.",
-    "My focus areas are search visibility, social media content systems, and clear reporting. I'm learning in public: every project below documents what I planned, what I built, and what I'd do differently next time.",
+    "I am an entry-level digital marketing professional with practical experience in website development, SEO, Google Ads, Meta Ads, social media marketing, content creation, Google Analytics, Google Tag Manager and AI-assisted marketing workflows.",
+    "I recently completed digital marketing training and am continuing to build my practical experience through real projects and an ongoing 3-month digital marketing internship at Briwon Academy, Jaipur.",
+    "I believe in practical learning, continuous improvement and using the right digital tools to create useful marketing solutions.",
   ],
   highlights: [
-    "Hands-on project experience across SEO, social and content",
-    "Ongoing digital marketing internship",
-    "Comfortable with analytics dashboards and reporting basics",
-    "Fast learner, deadline-reliable, collaborative",
+    "Practical project experience in website development and digital marketing",
+    "Ongoing 3-month digital marketing internship at Briwon Academy, Jaipur",
+    "Hands-on practice with Google Ads, Google Analytics and Google Tag Manager",
+    "Comfortable using AI-assisted tools within marketing workflows",
+    "Based in Jaipur, Rajasthan, India",
   ],
 };
 
 export type Skill = { name: string; note: string };
 export const skillGroups: { title: string; skills: Skill[] }[] = [
   {
-    title: "Marketing",
+    title: "Digital marketing",
     skills: [
-      { name: "SEO fundamentals", note: "On-page, keyword research, audits" },
-      { name: "Social media marketing", note: "Content calendars, community" },
-      { name: "Content writing", note: "Blogs, captions, ad copy" },
-      { name: "Email marketing", note: "Campaign drafting, list basics" },
+      { name: "SEO", note: "On-page and SEO-friendly website elements" },
+      { name: "Google Ads", note: "Campaign setup practice" },
+      { name: "Meta Ads", note: "Practising ad setup and structure" },
+      { name: "Social media marketing", note: "Content planning and posting" },
+      { name: "Content creation", note: "Website and social content" },
     ],
   },
   {
-    title: "Tools",
+    title: "Analytics & tracking",
     skills: [
-      { name: "Google Analytics", note: "Traffic & behaviour reports" },
-      { name: "Canva", note: "Social creatives, carousels" },
-      { name: "Meta Business Suite", note: "Scheduling, page insights" },
-      { name: "Google Sheets", note: "Trackers, simple dashboards" },
+      { name: "Google Analytics", note: "Traffic and behaviour reports" },
+      { name: "Google Tag Manager", note: "Tag and tracking implementation" },
+      { name: "Website tracking", note: "Basic measurement setup" },
+      { name: "Reporting", note: "Simple, factual summaries" },
     ],
   },
   {
-    title: "Working style",
+    title: "Website & tools",
     skills: [
-      { name: "Research & audits", note: "Competitor and content gaps" },
-      { name: "Reporting", note: "Clear, honest weekly summaries" },
-      { name: "Collaboration", note: "Briefs, feedback loops" },
-      { name: "AI-assisted workflows", note: "Ideation and drafting support" },
+      { name: "Website development", note: "Structure, content and pages" },
+      { name: "Lovable", note: "AI-assisted website building" },
+      { name: "WordPress", note: "Website editing and content updates" },
+      { name: "Canva", note: "Creatives and social graphics" },
+      { name: "AI tools", note: "Ideation, drafting and workflow support" },
     ],
   },
 ];
@@ -72,154 +74,160 @@ export type Project = {
   summary: string;
   objective: string;
   approach: string[];
-  learnings: string[];
   tools: string[];
-  liveUrl?: string; // REPLACE: live link if available
-  screenshot?: string; // REPLACE: screenshot URL / import
+  note?: string;
+  liveUrl?: string; // EDITABLE: add live URL when available
+  screenshot?: string; // EDITABLE: add screenshot when available
 };
 
 export const projects: Project[] = [
   {
-    id: "seo-audit",
-    title: "SEO audit for a small local business",
-    type: "Practice project",
+    id: "mera-saubhagya",
+    title: "Mera Saubhagya — Website Development & Digital Marketing Project",
+    type: "Personal practical project",
     summary:
-      "A full on-page and technical review of a local service website, delivered as a prioritised action list.",
+      "Website and online presence for a women's ethnic wear brand, built and organised end to end.",
     objective:
-      "Understand how a small site loses search visibility and produce recommendations a non-technical owner could act on.",
+      "Create a professional website and online presence for a women's ethnic wear brand.",
     approach: [
-      "Crawled key pages and logged title, meta and heading issues",
-      "Built a keyword map matched to existing service pages",
-      "Reviewed page speed and mobile usability signals",
-      "Wrote a prioritised, plain-language recommendation sheet",
+      "Planned the website structure",
+      "Developed the website",
+      "Organised content and product categories",
+      "Worked on SEO-friendly elements",
+      "Applied digital marketing concepts",
     ],
-    learnings: [
-      "Prioritising by effort-vs-impact matters more than listing every issue",
-      "Recommendations only land when written for the client, not for marketers",
-    ],
-    tools: ["Google Search Console", "Google Analytics", "Sheets"],
+    tools: ["Lovable", "AI tools", "SEO", "Content creation", "Website development"],
+    note: "Live link and screenshots to be added.",
   },
   {
-    id: "social-calendar",
-    title: "30-day social media content system",
-    type: "Practice project",
+    id: "naturopathy-website",
+    title: "Naturopathy Website — Client Project",
+    type: "Client website project",
     summary:
-      "A repeatable content calendar with pillars, hooks and creative templates for an Instagram-first brand.",
+      "A professional, user-friendly website for a naturopathy and healthcare client, reviewed and approved by the client.",
     objective:
-      "Move from ad-hoc posting to a structured, reusable monthly content system.",
+      "Create a professional and user-friendly website for a naturopathy/healthcare client.",
     approach: [
-      "Defined four content pillars from audience research",
-      "Drafted 30 captions with hook / value / CTA structure",
-      "Designed reusable Canva templates for consistency",
-      "Set up a simple tracker for posting and engagement notes",
+      "Planned the website structure",
+      "Developed the website using Lovable",
+      "Organised content and sections",
+      "Worked on UI and UX",
+      "Used AI-assisted website development",
     ],
-    learnings: [
-      "A template library removes most of the weekly friction",
-      "Consistency of format helps more than chasing every trend",
-    ],
-    tools: ["Canva", "Meta Business Suite", "Sheets"],
+    tools: ["Lovable", "AI tools", "Website development", "UI/UX", "Content structure"],
+    note: "The client reviewed and approved the website. Live link and screenshots to be added.",
   },
   {
-    id: "content-blog",
-    title: "Long-form blog & content writing samples",
-    type: "Writing portfolio",
+    id: "ads-analytics-practice",
+    title: "Personal Digital Marketing Project",
+    type: "Practical digital marketing project",
     summary:
-      "Search-informed articles written to a brief, with structure, internal linking and clear intent matching.",
+      "Hands-on practice with digital advertising, website tracking and analytics setup.",
     objective:
-      "Practise writing content that reads well for people and is structured for search.",
+      "Gain hands-on experience in digital advertising, website tracking and analytics.",
     approach: [
-      "Chose topics from keyword research and search intent",
-      "Outlined with H2/H3 structure before drafting",
-      "Edited for readability, scannability and internal links",
+      "Practised Google Ads campaign setup",
+      "Implemented Google Tag Manager",
+      "Worked with Google Analytics",
+      "Set up website tracking",
+      "Practised basic measurement and reporting",
     ],
-    learnings: [
-      "Outlining first cuts drafting time roughly in half",
-      "Intent match is the single biggest quality lever",
-    ],
-    tools: ["Google Docs", "Keyword research tools"],
+    tools: ["Google Ads", "Google Tag Manager", "Google Analytics"],
+    note: "Practice project — screenshots and case study to be added.",
   },
   {
-    id: "internship",
-    title: "Ongoing digital marketing internship",
-    type: "Internship (in progress)",
+    id: "briwon-internship",
+    title: "Digital Marketing Internship — Briwon Academy",
+    type: "Internship — ongoing",
     summary:
-      "Supporting day-to-day marketing execution: content, scheduling, research and reporting.",
-    objective:
-      "Apply learning in a live environment and build professional working habits.",
+      "Ongoing 3-month internship applying training across marketing, analytics and website work.",
+    objective: "Gain practical experience and apply training skills.",
     approach: [
-      "Assist with content drafting and scheduling",
-      "Support competitor and audience research tasks",
-      "Help compile weekly performance summaries",
+      "Practising and supporting SEO and content creation",
+      "Working on Google Ads and Meta Ads tasks",
+      "Supporting social media marketing activities",
+      "Working with Google Analytics and Google Tag Manager",
+      "Assisting with website development and AI-assisted marketing workflows",
     ],
-    learnings: [
-      "Real timelines change how you plan content",
-      "Clear internal communication is part of the deliverable",
+    tools: [
+      "SEO",
+      "Google Ads",
+      "Meta Ads",
+      "Google Analytics",
+      "Google Tag Manager",
+      "WordPress",
+      "Lovable",
+      "Canva",
+      "AI tools",
     ],
-    tools: ["Analytics dashboards", "Canva", "Sheets"],
+    note: "Ongoing 3-month internship — screenshots can be added later.",
   },
 ];
 
 export const experience = [
   {
     role: "Digital Marketing Intern",
-    org: "REPLACE: Company name",
-    period: "Ongoing",
+    org: "Briwon Academy, Jaipur",
+    period: "Ongoing · 3-month internship",
     points: [
-      "Supporting content creation, scheduling and basic performance reporting.",
-      "Assisting with keyword and competitor research for ongoing campaigns.",
-      "Collaborating with the team on briefs, revisions and publishing checklists.",
+      "Practising and supporting SEO, content creation and social media marketing.",
+      "Working on Google Ads and Meta Ads tasks alongside the team.",
+      "Using Google Analytics and Google Tag Manager for tracking and reporting.",
+      "Supporting website development and AI-assisted marketing workflows.",
     ],
   },
   {
-    role: "Self-directed marketing projects",
-    org: "Independent",
-    period: "REPLACE: 20XX — present",
+    role: "Website & Digital Marketing Projects",
+    org: "Independent · personal and client projects",
+    period: "Practical project work",
     points: [
-      "Built practice projects across SEO, social content and copywriting.",
-      "Documented process and takeaways for each project.",
+      "Built websites for a women's ethnic wear brand and a naturopathy client.",
+      "Practised Google Ads, Google Tag Manager and Google Analytics setup.",
     ],
   },
 ];
 
 export const education = [
   {
-    title: "REPLACE: Degree / Programme",
-    org: "REPLACE: Institution",
-    period: "REPLACE: 20XX — 20XX",
-    note: "REPLACE: brief note on coursework or focus.",
+    title: "Digital Marketing Training",
+    org: "Briwon Academy, Jaipur",
+    period: "Recently completed · certificate pending",
+    note: "Training covered SEO, Google Ads, Meta Ads, social media marketing, content creation, Google Analytics, Google Tag Manager, website development and AI-assisted marketing workflows.",
   },
   {
-    title: "Self-paced digital marketing learning",
-    org: "Online courses & practical study",
+    title: "Ongoing practical learning",
+    org: "Self-directed practice and live projects",
     period: "Ongoing",
-    note: "Learning through structured courses and applying it in live projects. No certification claimed.",
+    note: "Continuing to build practical experience through real projects and the ongoing internship.",
   },
 ];
 
 export const services = [
   {
+    title: "Website development",
+    body: "Simple, well-structured websites built with AI-assisted tools such as Lovable and WordPress.",
+  },
+  {
     title: "SEO support",
-    body: "On-page reviews, keyword research and content briefs for small sites.",
+    body: "On-page basics, SEO-friendly page structure and content organisation for small websites.",
   },
   {
-    title: "Social media content",
-    body: "Content calendars, captions and reusable creative templates.",
+    title: "Social media & content",
+    body: "Content planning, captions and creatives for social media pages.",
   },
   {
-    title: "Content writing",
-    body: "Blogs, landing copy and product descriptions written to a brief.",
-  },
-  {
-    title: "Reporting help",
-    body: "Simple, readable weekly or monthly performance summaries.",
+    title: "Analytics & tracking setup",
+    body: "Google Analytics and Google Tag Manager setup with basic, factual reporting.",
   },
 ];
 
 export const navLinks = [
+  { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];

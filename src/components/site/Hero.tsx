@@ -74,16 +74,16 @@ export function Hero() {
                   loading="eager"
                 />
               ) : (
-                /* PLACEHOLDER: profile photo — set `photo` in src/data/portfolio.ts */
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
-                  <span className="font-display text-4xl font-semibold text-white/80">HS</span>
-                  <p className="text-xs text-white/55">
-                    Placeholder — add your profile photo in
-                    <br />
-                    <code className="text-white/70">src/data/portfolio.ts</code>
+                <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 text-center">
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 font-display text-2xl font-semibold tracking-[0.08em] text-white/85">
+                    HS
+                  </span>
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                    Photo coming soon
                   </p>
                 </div>
               )}
+
             </div>
             <p className="flex items-center justify-center gap-1.5 py-3 text-xs text-white/60">
               <MapPin className="h-3.5 w-3.5" />
