@@ -3,6 +3,9 @@
 // intentional placeholders to be filled in later.
 // ============================================================
 
+import meraSaubhagyaScreenshot from "@/assets/mera-saubhagya-screenshot.png.asset.json";
+import naturopathyScreenshot from "@/assets/naturopathy-screenshot.png.asset.json";
+
 export const profile = {
   name: "Harshitaa Sharma",
   role: "Digital Marketing Professional",
@@ -97,7 +100,8 @@ export const projects: Project[] = [
       "Applied digital marketing concepts",
     ],
     tools: ["Lovable", "AI tools", "SEO", "Content creation", "Website development"],
-    note: "Live link and screenshots to be added.",
+    liveUrl: "https://lovable.dev/preview/xURrP1yZMBeFBo6NExWl16MDcqHf7GA1",
+    screenshot: meraSaubhagyaScreenshot.url,
   },
   {
     id: "naturopathy-website",
@@ -115,7 +119,8 @@ export const projects: Project[] = [
       "Used AI-assisted website development",
     ],
     tools: ["Lovable", "AI tools", "Website development", "UI/UX", "Content structure"],
-    note: "The client reviewed and approved the website. Live link and screenshots to be added.",
+    liveUrl: "https://lovable.dev/preview/vdWUbVAR3OE2Y8ZpQc25F4HJU4VMmA3R",
+    screenshot: naturopathyScreenshot.url,
   },
   {
     id: "ads-analytics-practice",
