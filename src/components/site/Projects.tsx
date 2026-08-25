@@ -63,6 +63,20 @@ export function Projects() {
                   View details
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
+
+                {project.liveUrl ? (
+                  <Button
+                    asChild
+                    size="sm"
+                    className="mt-4 w-fit rounded-full"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                      View live website
+                      <ArrowUpRight className="ml-1 h-4 w-4" />
+                    </a>
+                  </Button>
+                ) : null}
               </button>
             </Reveal>
           ))}
