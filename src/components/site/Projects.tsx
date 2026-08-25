@@ -59,24 +59,26 @@ export function Projects() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {project.summary}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  View details
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                    View details
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
 
-                {project.liveUrl ? (
-                  <Button
-                    asChild
-                    size="sm"
-                    className="mt-4 w-fit rounded-full"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                      View live website
-                      <ArrowUpRight className="ml-1 h-4 w-4" />
-                    </a>
-                  </Button>
-                ) : null}
+                  {project.liveUrl ? (
+                    <Button
+                      asChild
+                      size="sm"
+                      className="rounded-full"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                        View live website
+                        <ArrowUpRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </Button>
+                  ) : null}
+                </div>
               </button>
             </Reveal>
           ))}
