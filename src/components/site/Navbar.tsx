@@ -73,12 +73,23 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          <Button asChild size="sm" className="ml-2 rounded-full">
-            {/* REPLACE: resumeUrl in src/data/portfolio.ts */}
-            <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
+          {profile.resumeUrl ? (
+            <Button asChild size="sm" className="ml-2 rounded-full">
+              <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                Resume
+              </a>
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              disabled
+              className="ml-2 rounded-full"
+              title="Resume will be available soon"
+            >
               Resume
-            </a>
-          </Button>
+            </Button>
+          )}
+
         </div>
 
         <button
