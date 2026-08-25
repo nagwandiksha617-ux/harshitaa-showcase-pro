@@ -8,7 +8,7 @@ export function About() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="About"
-          title="Entry-level, practical and still learning"
+          title="Practical Digital Marketing Professional"
           description="Practical learning, continuous improvement and using the right digital tools to create useful marketing solutions."
         />
 
