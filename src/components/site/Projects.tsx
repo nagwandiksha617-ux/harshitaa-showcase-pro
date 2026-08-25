@@ -97,16 +97,6 @@ export function Projects() {
                     ))}
                   </ul>
                 </Block>
-                <Block title="What I learned">
-                  <ul className="space-y-2">
-                    {openProject.learnings.map((l) => (
-                      <li key={l} className="flex gap-2.5 text-sm text-muted-foreground">
-                        <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                        {l}
-                      </li>
-                    ))}
-                  </ul>
-                </Block>
                 <Block title="Tools used">
                   <div className="flex flex-wrap gap-2">
                     {openProject.tools.map((t) => (
@@ -121,17 +111,15 @@ export function Projects() {
                   {openProject.liveUrl ? (
                     <Button asChild size="sm" className="rounded-full">
                       <a href={openProject.liveUrl} target="_blank" rel="noreferrer">
-                        Open live project
+                        Visit website
                         <ArrowUpRight className="ml-1 h-4 w-4" />
                       </a>
                     </Button>
                   ) : (
-                    <>
-                      PLACEHOLDER: add a live URL and screenshots for this project in{" "}
-                      <code>src/data/portfolio.ts</code>.
-                    </>
+                    <>{openProject.note ?? "Live link and visuals to be added."}</>
                   )}
                 </div>
+
               </div>
             </>
           ) : null}
