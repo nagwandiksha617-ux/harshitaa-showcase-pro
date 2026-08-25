@@ -6,13 +6,14 @@ import { About } from "@/components/site/About";
 import { Skills } from "@/components/site/Skills";
 import { Projects } from "@/components/site/Projects";
 import { Experience } from "@/components/site/Experience";
+import { Education } from "@/components/site/Education";
 import { Services } from "@/components/site/Services";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 
-const title = "Harshitaa Sharma — Digital Marketing Professional";
+const title = "Harshitaa Sharma | Digital Marketing Professional";
 const description =
-  "Portfolio of Harshitaa Sharma, an entry-level digital marketing professional with hands-on projects in SEO, social media and content, plus an ongoing internship.";
+  "Portfolio of Harshitaa Sharma, an entry-level digital marketing professional based in Jaipur with practical experience in website development, SEO, Google Ads, Meta Ads, social media marketing, content creation and analytics.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,6 +45,7 @@ function Index() {
         <Skills />
         <Projects />
         <Experience />
+        <Education />
         <Services />
         <Contact />
       </main>

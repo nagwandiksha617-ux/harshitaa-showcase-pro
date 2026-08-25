@@ -11,7 +11,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Services"
           title="How I can help right now"
-          description="Scoped to what I can genuinely deliver at an entry level — clear briefs, honest timelines, documented work."
+          description="Entry-level support scoped to what I can genuinely deliver today, with clear briefs and realistic timelines."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

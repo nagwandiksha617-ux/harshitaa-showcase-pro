@@ -20,8 +20,8 @@ export function Projects() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Projects"
-          title="Work, process and takeaways"
-          description="Practice projects and internship work. Each card opens the brief, the approach and what I learned — no fabricated results."
+          title="Projects and practical work"
+          description="Personal, client and internship work. Each card opens the objective, what I did and the tools used."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">

@@ -7,8 +7,8 @@ export function Skills() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Skills"
-          title="What I can do today"
-          description="Working knowledge built through courses and applied practice — described honestly, without certification claims."
+          title="Skills and tools I work with"
+          description="Built through digital marketing training and applied in real website and marketing projects."
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
