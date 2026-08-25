@@ -33,22 +33,24 @@ export function Projects() {
                 className="card-lift group flex h-full w-full flex-col rounded-2xl border border-border bg-card p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 aria-label={`Open details for ${project.title}`}
               >
-                <div className="mb-5 flex aspect-[16/9] items-center justify-center overflow-hidden rounded-xl border border-border bg-surface">
+                <div className="mb-5 flex aspect-[16/9] items-center justify-center overflow-hidden rounded-xl border border-border bg-gradient-to-br from-surface to-accent/40">
                   {project.screenshot ? (
                     <img
                       src={project.screenshot}
-                      alt={`${project.title} screenshot`}
+                      alt={`Preview of ${project.title}`}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   ) : (
-                    /* PLACEHOLDER: project screenshot — set `screenshot` in src/data/portfolio.ts */
-                    <span className="flex flex-col items-center gap-1.5 text-xs text-muted-foreground">
-                      <ImageIcon className="h-5 w-5" aria-hidden />
-                      Screenshot placeholder
+                    <span className="flex flex-col items-center gap-2 text-center">
+                      <ImageIcon className="h-6 w-6 text-primary/50" aria-hidden />
+                      <span className="text-xs font-medium tracking-wide text-muted-foreground">
+                        Visuals coming soon
+                      </span>
                     </span>
                   )}
                 </div>
+
 
                 <Badge variant="secondary" className="w-fit rounded-full text-xs font-medium">
                   {project.type}
