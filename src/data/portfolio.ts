@@ -86,10 +86,10 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "mera-saubhagya",
-    title: "Mera Saubhagya — Website Development & Digital Marketing Project",
+    title: "Mera Saubhagya — Clothing Brand Website Project",
     type: "Personal practical project",
     summary:
-      "Website and online presence for a women's ethnic wear brand, built and organised end to end.",
+      "A self-initiated website project for a women’s ethnic wear clothing brand, focused on building a professional online presence.",
     objective:
       "Create a professional website and online presence for a women's ethnic wear brand.",
     approach: [
