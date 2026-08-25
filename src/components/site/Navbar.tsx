@@ -121,11 +121,18 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button asChild className="mt-3 w-full rounded-full">
-            <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
-              View resume
-            </a>
-          </Button>
+          {profile.resumeUrl ? (
+            <Button asChild className="mt-3 w-full rounded-full">
+              <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                Resume
+              </a>
+            </Button>
+          ) : (
+            <Button disabled className="mt-3 w-full rounded-full">
+              Resume coming soon
+            </Button>
+          )}
+
         </div>
       ) : null}
     </header>
