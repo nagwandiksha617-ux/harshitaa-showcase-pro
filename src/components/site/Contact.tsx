@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,40 +18,69 @@ export function Contact() {
         <SectionHeading
           eyebrow="Contact"
           tone="dark"
-          title="Let's talk about your next project"
-          description="Open to entry-level digital marketing roles, internships and small freelance work. I usually reply within a day or two."
+          title="Let's connect"
+          description="Open to digital marketing roles, internships and freelance website or marketing projects."
         />
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal className="space-y-4">
-            {/* PLACEHOLDER: replace email, phone and social links in src/data/portfolio.ts */}
-            <a
-              href={`mailto:${profile.email}`}
-              className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-5 text-sm text-white/85 backdrop-blur transition-colors hover:bg-white/10"
-            >
-              <Mail className="h-5 w-5 text-brand-soft" aria-hidden />
-              {profile.email}
-            </a>
-            <a
-              href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-              className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-5 text-sm text-white/85 backdrop-blur transition-colors hover:bg-white/10"
-            >
-              <Phone className="h-5 w-5 text-brand-soft" aria-hidden />
-              {profile.phone}
-            </a>
+            {profile.email ? (
+              <a
+                href={`mailto:${profile.email}`}
+                className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-5 text-sm text-white/85 backdrop-blur transition-colors hover:bg-white/10"
+              >
+                <Mail className="h-5 w-5 text-brand-soft" aria-hidden />
+                {profile.email}
+              </a>
+            ) : (
+              <div className="flex items-center gap-3 rounded-2xl border border-dashed border-white/20 bg-white/5 p-5 text-sm text-white/60">
+                <Mail className="h-5 w-5 text-brand-soft" aria-hidden />
+                Email address to be added
+              </div>
+            )}
+
+            {profile.phone ? (
+              <a
+                href={`tel:${profile.phone.replace(/\s+/g, "")}`}
+                className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-5 text-sm text-white/85 backdrop-blur transition-colors hover:bg-white/10"
+              >
+                <Phone className="h-5 w-5 text-brand-soft" aria-hidden />
+                {profile.phone}
+              </a>
+            ) : (
+              <div className="flex items-center gap-3 rounded-2xl border border-dashed border-white/20 bg-white/5 p-5 text-sm text-white/60">
+                <Phone className="h-5 w-5 text-brand-soft" aria-hidden />
+                Phone number to be added
+              </div>
+            )}
+
+            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-5 text-sm text-white/85 backdrop-blur">
+              <MapPin className="h-5 w-5 text-brand-soft" aria-hidden />
+              {profile.location}
+            </div>
+
             <div className="flex flex-wrap gap-2 pt-1">
-              {profile.socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                >
-                  {s.label}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              ))}
+              {profile.socials.map((s) =>
+                s.href ? (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    {s.label}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                ) : (
+                  <span
+                    key={s.label}
+                    className="inline-flex items-center gap-1 rounded-full border border-dashed border-white/20 px-4 py-2 text-sm text-white/50"
+                  >
+                    {s.label} — link to be added
+                  </span>
+                ),
+              )}
             </div>
           </Reveal>
 
@@ -61,10 +90,9 @@ export function Contact() {
               onSubmit={(e) => {
                 e.preventDefault();
                 setSending(true);
-                // PLACEHOLDER: connect this form to email or a backend to receive messages.
                 setTimeout(() => {
                   setSending(false);
-                  toast.success("Thanks! Message noted — hook this form up to start receiving it.");
+                  toast.success("Thanks for reaching out! Message delivery is being set up.");
                   (e.target as HTMLFormElement).reset();
                 }, 600);
               }}
