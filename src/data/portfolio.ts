@@ -182,12 +182,13 @@ export const experience = [
     ],
   },
   {
-    role: "Website & Digital Marketing Projects",
+    role: "Practical Digital Marketing Experience",
     org: "Independent · personal and client projects",
     period: "Practical project work",
     points: [
-      "Built websites for a women's ethnic wear brand and a naturopathy client.",
+      "Built and organised websites for a women’s ethnic wear brand and a naturopathy client.",
       "Practised Google Ads, Google Tag Manager and Google Analytics setup.",
+      "Applied SEO, content creation and digital marketing concepts through practical projects.",
     ],
   },
 ];
