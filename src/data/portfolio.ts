@@ -195,6 +195,18 @@ export const experience = [
 
 export const education = [
   {
+    title: "Master of Arts (M.A.) in English",
+    org: "Pandit Deendayal Upadhyaya Shekhawati University, Sikar; Ginnidevi Satyanarayan Sheksaria Girls P.G. College, Chirawa",
+    period: "Completed in 2019",
+    note: "Formal postgraduate degree in English literature.",
+  },
+  {
+    title: "Bachelor of Arts (B.A.)",
+    org: "University of Rajasthan, Jaipur; G.S.S.N. Girls College, Chirawa (Jhunjhunu)",
+    period: "Completed in 2017",
+    note: "Formal undergraduate degree in arts.",
+  },
+  {
     title: "Digital Marketing Training",
     org: "Briwon Academy, Jaipur",
     period: "Recently completed · certificate pending",
