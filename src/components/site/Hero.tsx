@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Camera, Mail, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/portfolio";
 
@@ -74,16 +74,18 @@ export function Hero() {
                   loading="eager"
                 />
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 text-center">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 font-display text-2xl font-semibold tracking-[0.08em] text-white/85">
-                    HS
-                  </span>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">
-                    Photo coming soon
+                <div
+                  className="flex h-full w-full flex-col items-center justify-center gap-4 px-6 text-center"
+                  aria-label="Professional photo placeholder"
+                >
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full border border-white/20 bg-white/5 shadow-[0_0_40px_-12px_oklch(0.6_0.14_205/0.35)] backdrop-blur-sm">
+                    <Camera className="h-9 w-9 text-white/50" />
+                  </div>
+                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/50">
+                    Professional photo
                   </p>
                 </div>
               )}
-
             </div>
             <p className="flex items-center justify-center gap-1.5 py-3 text-xs text-white/60">
               <MapPin className="h-3.5 w-3.5" />
