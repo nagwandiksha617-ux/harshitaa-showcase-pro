@@ -3,6 +3,7 @@
 // intentional placeholders to be filled in later.
 // ============================================================
 
+import harshitaaPhoto from "@/assets/harshitaa-sharma-photo.png.asset.json";
 import meraSaubhagyaScreenshot from "@/assets/mera-saubhagya-screenshot.png.asset.json";
 import naturopathyScreenshot from "@/assets/naturopathy-screenshot.png.asset.json";
 
@@ -14,7 +15,7 @@ export const profile = {
   location: "Jaipur, Rajasthan, India",
   email: "", // EDITABLE: add email address
   phone: "", // EDITABLE: add phone number
-  photo: "", // EDITABLE: add profile photo
+  photo: harshitaaPhoto.url, // EDITABLE: replace with different photo if needed
   resumeUrl: "", // EDITABLE: add resume PDF link
   socials: [
     { label: "LinkedIn", href: "" }, // EDITABLE
