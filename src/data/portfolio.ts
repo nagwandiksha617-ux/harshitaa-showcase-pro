@@ -71,6 +71,73 @@ export const skillGroups: { title: string; skills: Skill[] }[] = [
   },
 ];
 
+export type Capability = { title: string; points: string[] };
+export const capabilities: Capability[] = [
+  {
+    title: "SEO",
+    points: [
+      "On-page SEO and keyword-friendly content",
+      "SEO-friendly website structure and meta elements",
+      "Basic technical SEO checks such as headings, URLs and alt text",
+      "Applied through the Mera Saubhagya project and internship tasks",
+    ],
+  },
+  {
+    title: "Google Ads",
+    points: [
+      "Search campaign setup practice",
+      "Keyword and ad group organisation",
+      "Basic bidding and budget awareness",
+      "Tracking setup with Google Tag Manager and Google Analytics",
+    ],
+  },
+  {
+    title: "Meta Ads",
+    points: [
+      "Ad campaign structure practice",
+      "Audience targeting fundamentals",
+      "Creative and copy coordination",
+      "Supporting campaign tasks during my internship",
+    ],
+  },
+  {
+    title: "Social Media Marketing",
+    points: [
+      "Content planning and scheduling",
+      "Caption writing for social posts",
+      "Basic community engagement",
+      "Maintaining a consistent brand voice across platforms",
+    ],
+  },
+  {
+    title: "Content Creation",
+    points: [
+      "Website copy and page content",
+      "Social media captions and creatives using Canva",
+      "Blog and post ideation with drafting support",
+      "AI-assisted drafting and editing within workflows",
+    ],
+  },
+  {
+    title: "Analytics & Tracking",
+    points: [
+      "Google Analytics traffic and behaviour reports",
+      "Google Tag Manager tag implementation",
+      "Basic website event tracking setup",
+      "Simple, factual reporting for stakeholders",
+    ],
+  },
+  {
+    title: "Website Development",
+    points: [
+      "Simple, structured websites using Lovable and AI-assisted tools",
+      "WordPress content and page editing",
+      "Organising content, navigation and user flow",
+      "Responsive, SEO-friendly page structure",
+    ],
+  },
+];
+
 export type Project = {
   id: string;
   title: string;
@@ -244,6 +311,7 @@ export const navLinks = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
+  { label: "What I Can Do", href: "#what-i-can-do" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
