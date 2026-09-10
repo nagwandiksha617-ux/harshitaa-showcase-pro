@@ -4,7 +4,7 @@
 // ============================================================
 
 import harshitaaPhoto from "@/assets/harshitaa-sharma-photo.png.asset.json";
-import harshitaaResume from "@/assets/harshitaa-sharma-resume.pdf.asset.json";
+
 import meraSaubhagyaScreenshot from "@/assets/mera-saubhagya-screenshot.png.asset.json";
 import naturopathyScreenshot from "@/assets/naturopathy-screenshot.png.asset.json";
 
