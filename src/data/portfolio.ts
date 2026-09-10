@@ -4,6 +4,7 @@
 // ============================================================
 
 import harshitaaPhoto from "@/assets/harshitaa-sharma-photo.png.asset.json";
+import harshitaaResume from "@/assets/harshitaa-sharma-resume.pdf.asset.json";
 import meraSaubhagyaScreenshot from "@/assets/mera-saubhagya-screenshot.png.asset.json";
 import naturopathyScreenshot from "@/assets/naturopathy-screenshot.png.asset.json";
 
@@ -16,7 +17,7 @@ export const profile = {
   email: "", // EDITABLE: add email address
   phone: "", // EDITABLE: add phone number
   photo: harshitaaPhoto.url, // EDITABLE: replace with different photo if needed
-  resumeUrl: "", // EDITABLE: add resume PDF link
+  resumeUrl: harshitaaResume.url,
   socials: [
     { label: "LinkedIn", href: "" }, // EDITABLE
     { label: "Instagram", href: "" }, // EDITABLE
