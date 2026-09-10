@@ -311,7 +311,6 @@ export const navLinks = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "What I Can Do", href: "#what-i-can-do" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
