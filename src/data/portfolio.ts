@@ -17,7 +17,7 @@ export const profile = {
   email: "", // EDITABLE: add email address
   phone: "", // EDITABLE: add phone number
   photo: harshitaaPhoto.url, // EDITABLE: replace with different photo if needed
-  resumeUrl: "/api/public/resume",
+  resumeUrl: "/Harshitaa-Resume.pdf",
   socials: [
     { label: "LinkedIn", href: "" }, // EDITABLE
     { label: "Instagram", href: "" }, // EDITABLE
