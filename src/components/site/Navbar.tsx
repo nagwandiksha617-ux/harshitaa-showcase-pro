@@ -123,7 +123,7 @@ export function Navbar() {
           </ul>
           {profile.resumeUrl ? (
             <Button asChild className="mt-3 w-full rounded-full">
-              <a href={profile.resumeUrl} download>
+              <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
                 Resume
               </a>
             </Button>
