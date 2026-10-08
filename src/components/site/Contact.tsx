@@ -142,6 +142,39 @@ function mergeUtm(captured: Record<string, string>, fresh: Record<string, string
   return merged;
 }
 
+// Remembers UTM values for the visit so they survive in-page navigation or a
+// URL that loses its query string before the visitor submits the form.
+const UTM_STORAGE_KEY = "inquiry_utm";
+function loadStoredUtm(): Record<string, string> {
+  try {
+    const raw = window.sessionStorage.getItem(UTM_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Record<string, string>) : {};
+  } catch {
+    return {};
+  }
+}
+function storeUtm(values: Record<string, string>) {
+  try {
+    if (UTM_KEYS.some((k) => values[k])) window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(values));
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+// Same values under the common naming styles a Sheet script may read
+// (utm_source, utmSource, "UTM Source").
+function utmAliases(values: Record<string, string>) {
+  const out: Record<string, string> = {};
+  UTM_KEYS.forEach((k) => {
+    const part = k.slice(4);
+    const v = values[k] ?? "";
+    out[k] = v;
+    out[`utm${part[0].toUpperCase()}${part.slice(1)}`] = v;
+    out[`UTM ${part[0].toUpperCase()}${part.slice(1)}`] = v;
+  });
+  return out;
+}
+
 const inquirySchema = z.object({
   full_name: z.string().trim().min(1, "Please enter your full name").max(100),
   email: z.string().trim().min(1, "Please enter your email address").email("Please enter a valid email address").max(255),
@@ -161,7 +194,9 @@ function InquiryForm() {
   const [utm, setUtm] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    setUtm(readUtmParams());
+    const captured = mergeUtm(mergeUtm(readUtmParams(), loadStoredUtm()), readUtmParams());
+    storeUtm(captured);
+    setUtm(captured);
   }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -181,16 +216,21 @@ function InquiryForm() {
     setErrors({});
     setSending(true);
     try {
+      const utmValues = mergeUtm(mergeUtm(utm, loadStoredUtm()), readUtmParams());
       const payload = {
         fullName: parsed.data.full_name,
         email: parsed.data.email,
         phone: parsed.data.phone ?? "",
         interestedIn: parsed.data.interested_in,
         inquiryDetails: parsed.data.details,
-        ...mergeUtm(utm, readUtmParams()),
+        ...utmAliases(utmValues),
         submitted_at: new Date().toISOString(),
       };
-      await fetch(INQUIRY_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+      // UTM values also go in the endpoint's query string so scripts reading
+      // e.parameter receive them as well as scripts parsing the JSON body.
+      const url = new URL(INQUIRY_ENDPOINT);
+      UTM_KEYS.forEach((k) => url.searchParams.set(k, utmValues[k] ?? ""));
+      await fetch(url.toString(), { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
       form.reset();
       setSuccess(true);
       toast.success("Thank you! Your inquiry has been submitted successfully. I’ll get back to you soon.");
