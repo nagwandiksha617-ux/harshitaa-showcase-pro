@@ -230,7 +230,7 @@ function Field({
   label: string;
   type?: string;
   placeholder?: string;
-  error?: string;
+  error?: string | undefined;
 }) {
   return (
     <div>
