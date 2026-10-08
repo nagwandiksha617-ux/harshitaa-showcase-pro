@@ -109,6 +109,38 @@ const INTERESTS = [
 ];
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
+const UTM_MAX_LENGTH = 300;
+
+// Reads the five UTM values from the current page URL. Looks at the query
+// string and at any query string inside the hash, matches parameter names
+// case-insensitively, and leaves a blank value when a parameter is absent.
+function readUtmParams(): Record<string, string> {
+  const sources = [new URLSearchParams(window.location.search)];
+  const hashQuery = window.location.hash.indexOf("?");
+  if (hashQuery >= 0) sources.push(new URLSearchParams(window.location.hash.slice(hashQuery + 1)));
+
+  const found = new Map<string, string>();
+  sources.forEach((params) =>
+    params.forEach((value, key) => {
+      const name = key.toLowerCase();
+      if ((UTM_KEYS as readonly string[]).includes(name) && !found.has(name)) found.set(name, value);
+    }),
+  );
+
+  const values: Record<string, string> = {};
+  UTM_KEYS.forEach((k) => (values[k] = (found.get(k) ?? "").trim().slice(0, UTM_MAX_LENGTH)));
+  return values;
+}
+
+// Keeps the values captured when the page opened, upgraded by any fresh
+// non-empty values present in the URL at submit time.
+function mergeUtm(captured: Record<string, string>, fresh: Record<string, string>) {
+  const merged = { ...captured };
+  UTM_KEYS.forEach((k) => {
+    if (fresh[k]) merged[k] = fresh[k];
+  });
+  return merged;
+}
 
 const inquirySchema = z.object({
   full_name: z.string().trim().min(1, "Please enter your full name").max(100),
@@ -129,10 +161,7 @@ function InquiryForm() {
   const [utm, setUtm] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const values: Record<string, string> = {};
-    UTM_KEYS.forEach((k) => (values[k] = params.get(k) ?? ""));
-    setUtm(values);
+    setUtm(readUtmParams());
   }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -158,7 +187,7 @@ function InquiryForm() {
         phone: parsed.data.phone ?? "",
         interestedIn: parsed.data.interested_in,
         inquiryDetails: parsed.data.details,
-        ...utm,
+        ...mergeUtm(utm, readUtmParams()),
         submitted_at: new Date().toISOString(),
       };
       await fetch(INQUIRY_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
