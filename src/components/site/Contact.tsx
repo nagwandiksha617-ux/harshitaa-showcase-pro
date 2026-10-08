@@ -169,8 +169,9 @@ function utmAliases(values: Record<string, string>) {
     const part = k.slice(4);
     const v = values[k] ?? "";
     out[k] = v;
-    out[`utm${part[0].toUpperCase()}${part.slice(1)}`] = v;
-    out[`UTM ${part[0].toUpperCase()}${part.slice(1)}`] = v;
+    const cap = part.charAt(0).toUpperCase() + part.slice(1);
+    out[`utm${cap}`] = v;
+    out[`UTM ${cap}`] = v;
   });
   return out;
 }
