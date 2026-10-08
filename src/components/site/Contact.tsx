@@ -92,8 +92,9 @@ export function Contact() {
   );
 }
 
-// Future: set this to a Google Apps Script web app URL to store inquiries in Google Sheets.
-const INQUIRY_ENDPOINT = "";
+// Google Apps Script Web App that saves inquiries to the connected Google Sheet.
+const INQUIRY_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbySxK9gB425pfdElKA9DC5R2Ap9GHGCP5b7xIz4lTHtNvI8FIhs1NsOicag3sHoy2cD/exec";
 
 const INTERESTS = [
   "Digital Marketing",
@@ -151,13 +152,19 @@ function InquiryForm() {
     setErrors({});
     setSending(true);
     try {
-      const payload = { ...parsed.data, ...utm, submitted_at: new Date().toISOString() };
-      if (INQUIRY_ENDPOINT) {
-        await fetch(INQUIRY_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
-      }
+      const payload = {
+        fullName: parsed.data.full_name,
+        email: parsed.data.email,
+        phone: parsed.data.phone ?? "",
+        interestedIn: parsed.data.interested_in,
+        inquiryDetails: parsed.data.details,
+        ...utm,
+        submitted_at: new Date().toISOString(),
+      };
+      await fetch(INQUIRY_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
       form.reset();
       setSuccess(true);
-      toast.success("Thank you! Your inquiry has been received. I’ll get back to you soon.");
+      toast.success("Thank you! Your inquiry has been submitted successfully. I’ll get back to you soon.");
     } finally {
       setSending(false);
     }
@@ -212,7 +219,7 @@ function InquiryForm() {
       </Button>
       {success && (
         <p role="status" className="text-center text-sm text-brand-soft">
-          Thank you! Your inquiry has been received. I’ll get back to you soon.
+          Thank you! Your inquiry has been submitted successfully. I’ll get back to you soon.
         </p>
       )}
     </form>
