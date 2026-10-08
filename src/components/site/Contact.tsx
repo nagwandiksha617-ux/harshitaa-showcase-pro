@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { z } from "zod";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -9,8 +10,6 @@ import { Reveal, SectionHeading } from "./Reveal";
 import { profile } from "@/data/portfolio";
 
 export function Contact() {
-  const [sending, setSending] = useState(false);
-
   return (
     <section id="contact" className="hero-dark relative overflow-hidden py-24">
       <div aria-hidden className="grid-lines absolute inset-0 opacity-50" />
@@ -85,39 +84,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <form
-              className="space-y-4 rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSending(true);
-                setTimeout(() => {
-                  setSending(false);
-                  toast.success("Thanks for reaching out! Message delivery is being set up.");
-                  (e.target as HTMLFormElement).reset();
-                }, 600);
-              }}
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Field id="name" label="Your name" />
-                <Field id="email" label="Email" type="email" />
-              </div>
-              <div>
-                <Label htmlFor="message" className="text-white/80">
-                  Message
-                </Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder="Tell me a little about the role or project…"
-                  className="mt-2 border-white/20 bg-white/5 text-white placeholder:text-white/40"
-                />
-              </div>
-              <Button type="submit" size="lg" disabled={sending} className="w-full rounded-full">
-                {sending ? "Sending…" : "Send message"}
-              </Button>
-            </form>
+            <InquiryForm />
           </Reveal>
         </div>
       </div>
@@ -125,19 +92,151 @@ export function Contact() {
   );
 }
 
-function Field({ id, label, type = "text" }: { id: string; label: string; type?: string }) {
+// Future: set this to a Google Apps Script web app URL to store inquiries in Google Sheets.
+const INQUIRY_ENDPOINT = "";
+
+const INTERESTS = [
+  "Digital Marketing",
+  "SEO",
+  "Google Ads",
+  "Meta Ads",
+  "Social Media Marketing",
+  "Website Development",
+  "Freelance Project",
+  "Job / Internship",
+  "Other",
+];
+
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
+
+const inquirySchema = z.object({
+  full_name: z.string().trim().min(1, "Please enter your full name").max(100),
+  email: z.string().trim().min(1, "Please enter your email address").email("Please enter a valid email address").max(255),
+  phone: z.string().trim().max(30).optional(),
+  interested_in: z.string().refine((v) => INTERESTS.includes(v), "Please choose an option"),
+  details: z.string().trim().min(1, "Please share a few details").max(2000),
+});
+
+type Errors = Partial<Record<keyof z.infer<typeof inquirySchema>, string>>;
+
+const fieldClass = "mt-2 border-white/20 bg-white/5 text-white placeholder:text-white/40";
+
+function InquiryForm() {
+  const [sending, setSending] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+  const [success, setSuccess] = useState(false);
+  const [utm, setUtm] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const values: Record<string, string> = {};
+    UTM_KEYS.forEach((k) => (values[k] = params.get(k) ?? ""));
+    setUtm(values);
+  }, []);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const parsed = inquirySchema.safeParse(data);
+    if (!parsed.success) {
+      const next: Errors = {};
+      parsed.error.issues.forEach((i) => {
+        const k = i.path[0] as keyof Errors;
+        if (!next[k]) next[k] = i.message;
+      });
+      setErrors(next);
+      return;
+    }
+    setErrors({});
+    setSending(true);
+    try {
+      const payload = { ...parsed.data, ...utm, submitted_at: new Date().toISOString() };
+      if (INQUIRY_ENDPOINT) {
+        await fetch(INQUIRY_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+      }
+      form.reset();
+      setSuccess(true);
+      toast.success("Thank you! Your inquiry has been received. I’ll get back to you soon.");
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <form
+      noValidate
+      onSubmit={onSubmit}
+      className="space-y-4 rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur"
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field id="full_name" label="Full Name *" placeholder="Enter your full name" error={errors.full_name} />
+        <Field id="email" label="Email Address *" type="email" placeholder="Enter your email address" error={errors.email} />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field id="phone" label="Phone Number" type="tel" placeholder="Enter your phone number" error={errors.phone} />
+        <div>
+          <Label htmlFor="interested_in" className="text-white/80">Interested In *</Label>
+          <select
+            id="interested_in"
+            name="interested_in"
+            defaultValue=""
+            aria-invalid={!!errors.interested_in}
+            className={`${fieldClass} flex h-9 w-full rounded-md border px-3 text-sm [&>option]:text-foreground`}
+          >
+            <option value="" disabled>Select an option</option>
+            {INTERESTS.map((o) => (
+              <option key={o} value={o}>{o}</option>
+            ))}
+          </select>
+          {errors.interested_in && <p className="mt-1 text-xs text-red-300">{errors.interested_in}</p>}
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="details" className="text-white/80">Project / Inquiry Details *</Label>
+        <Textarea
+          id="details"
+          name="details"
+          rows={5}
+          aria-invalid={!!errors.details}
+          placeholder="Tell me a little about your project, requirement or inquiry..."
+          className={fieldClass}
+        />
+        {errors.details && <p className="mt-1 text-xs text-red-300">{errors.details}</p>}
+      </div>
+      {UTM_KEYS.map((k) => (
+        <input key={k} type="hidden" name={k} value={utm[k] ?? ""} readOnly />
+      ))}
+      <Button type="submit" size="lg" disabled={sending} className="w-full rounded-full">
+        {sending ? "Sending…" : "Send Inquiry"}
+      </Button>
+      {success && (
+        <p role="status" className="text-center text-sm text-brand-soft">
+          Thank you! Your inquiry has been received. I’ll get back to you soon.
+        </p>
+      )}
+    </form>
+  );
+}
+
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  error,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  placeholder?: string;
+  error?: string | undefined;
+}) {
   return (
     <div>
-      <Label htmlFor={id} className="text-white/80">
-        {label}
-      </Label>
-      <Input
-        id={id}
-        name={id}
-        type={type}
-        required
-        className="mt-2 border-white/20 bg-white/5 text-white placeholder:text-white/40"
-      />
+      <Label htmlFor={id} className="text-white/80">{label}</Label>
+      <Input id={id} name={id} type={type} placeholder={placeholder} aria-invalid={!!error} className={fieldClass} />
+      {error && <p className="mt-1 text-xs text-red-300">{error}</p>}
     </div>
   );
 }
