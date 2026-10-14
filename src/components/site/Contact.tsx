@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Reveal, SectionHeading } from "./Reveal";
 import { profile } from "@/data/portfolio";
+import { useServerFn } from "@tanstack/react-start";
+import { sendMetaLeadEvent } from "@/lib/meta-capi.functions";
 
 export function Contact() {
   return (
@@ -196,6 +198,7 @@ function InquiryForm() {
   // Guards against firing the Meta Pixel Lead event more than once for the
   // same successful submission.
   const leadFiredRef = useRef(false);
+  const sendLead = useServerFn(sendMetaLeadEvent);
 
   useEffect(() => {
     const captured = mergeUtm(mergeUtm(readUtmParams(), loadStoredUtm()), readUtmParams());
@@ -244,7 +247,24 @@ function InquiryForm() {
       // single successful inquiry can never fire it twice.
       if (!leadFiredRef.current) {
         leadFiredRef.current = true;
-        (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq?.("track", "Lead");
+        // One shared event ID for the browser and server Lead events so Meta
+        // deduplicates them.
+        const eventId = crypto.randomUUID();
+        (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq?.("track", "Lead", {}, { eventID: eventId });
+        const cookie = (n: string) => document.cookie.match(new RegExp(`(?:^|; )${n}=([^;]*)`))?.[1];
+        const fbp = cookie("_fbp");
+        const fbc = cookie("_fbc");
+        // Server Lead (CAPI). Stays disabled server-side until the token is set;
+        // failures never affect the visitor.
+        sendLead({
+          data: {
+            eventId,
+            eventSourceUrl: window.location.href,
+            clientUserAgent: navigator.userAgent,
+            ...(fbp ? { fbp } : {}),
+            ...(fbc ? { fbc } : {}),
+          },
+        }).catch(() => {});
       }
     } finally {
       setSending(false);

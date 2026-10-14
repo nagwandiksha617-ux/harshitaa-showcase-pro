@@ -114,7 +114,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        {/* Meta Pixel base code (Pixel ID 1783200566262940). Loads once on every
+        {/* Meta Pixel base code (Pixel ID 1572298120852523). Loads once on every
             page; only the automatic PageView event is fired. No Lead or other
             events here — those are added separately after verification. */}
         <script
@@ -127,7 +127,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1783200566262940');
+fbq('init', '1572298120852523');
 fbq('track', 'PageView');`,
           }}
         />
@@ -136,7 +136,7 @@ fbq('track', 'PageView');`,
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1783200566262940&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=1572298120852523&ev=PageView&noscript=1"
             alt=""
           />
         </noscript>

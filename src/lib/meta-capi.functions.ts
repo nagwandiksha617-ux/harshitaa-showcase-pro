@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const META_PIXEL_ID = "1783200566262940";
+const META_PIXEL_ID = "1572298120852523";
 
 /**
  * Preview-only setup check for Meta Conversions API.
