@@ -238,6 +238,14 @@ function InquiryForm() {
       form.reset();
       setSuccess(true);
       toast.success("Thank you! Your inquiry has been submitted successfully. I’ll get back to you soon.");
+      // Meta Pixel Lead event: fires only here, after the inquiry has been
+      // successfully sent to the Google Apps Script endpoint — never on
+      // validation errors, failed sends, or button clicks. The ref ensures a
+      // single successful inquiry can never fire it twice.
+      if (!leadFiredRef.current) {
+        leadFiredRef.current = true;
+        (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq?.("track", "Lead");
+      }
     } finally {
       setSending(false);
     }
