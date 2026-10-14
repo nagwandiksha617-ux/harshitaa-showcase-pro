@@ -24,6 +24,8 @@ export type MetaLeadEventInput = {
   clientUserAgent?: string;
   fbp?: string;
   fbc?: string;
+  /** Preview-only Meta Test Events code (e.g. TEST12345). */
+  testEventCode?: string;
 };
 
 /**
@@ -41,7 +43,8 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
     if (typeof data.eventSourceUrl !== "string" || !data.eventSourceUrl) {
       throw new Error("eventSourceUrl is required");
     }
-    return data;
+    const code = typeof data.testEventCode === "string" ? data.testEventCode.trim() : "";
+    return { ...data, testEventCode: /^TEST[A-Z0-9]{1,20}$/i.test(code) ? code : undefined };
   })
   .handler(async ({ data }) => {
     const token = process.env["META_CAPI_ACCESS_TOKEN"];
@@ -59,6 +62,7 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          ...(data.testEventCode ? { test_event_code: data.testEventCode } : {}),
           data: [
             {
               event_name: "Lead",
@@ -79,6 +83,19 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
         }),
       },
     );
+
+    if (!response.ok) {
+      // Log status and Meta's error message only — never the token or body.
+      let msg = "";
+      try {
+        msg = ((await response.json()) as { error?: { message?: string } }).error?.message ?? "";
+      } catch {
+        /* ignore */
+      }
+      console.error(`Meta CAPI request failed [${response.status}] ${msg}`);
+      return { sent: false, reason: "capi_request_failed" as const, status: response.status };
+    }
+
 
     if (!response.ok) {
       // Log status only — never the token or request body.
