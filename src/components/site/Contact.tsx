@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
