@@ -11,7 +11,6 @@ import { Education } from "@/components/site/Education";
 import { Services } from "@/components/site/Services";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
-import { MetaCapiStatusPanel } from "@/components/site/MetaCapiStatusPanel";
 
 const title = "Harshitaa Sharma | Digital Marketing Professional";
 const description =
@@ -53,7 +52,6 @@ function Index() {
         <Contact />
       </main>
       <Footer />
-      {import.meta.env.DEV ? <MetaCapiStatusPanel /> : null}
     </div>
   );
 }
