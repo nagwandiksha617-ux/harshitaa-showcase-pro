@@ -193,6 +193,9 @@ function InquiryForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [success, setSuccess] = useState(false);
   const [utm, setUtm] = useState<Record<string, string>>({});
+  // Guards against firing the Meta Pixel Lead event more than once for the
+  // same successful submission.
+  const leadFiredRef = useRef(false);
 
   useEffect(() => {
     const captured = mergeUtm(mergeUtm(readUtmParams(), loadStoredUtm()), readUtmParams());
