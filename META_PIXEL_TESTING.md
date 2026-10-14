@@ -1,6 +1,6 @@
 # Meta Pixel Verification Checklist (Preview Only)
 
-Pixel ID: **1783200566262940** · Events: **PageView** (automatic) and **Lead** (on successful inquiry submission)
+Pixel ID: **1572298120852523** · Events: **PageView** (automatic) and **Lead** (on successful inquiry submission)
 
 Use this checklist on the Lovable preview or the published URL. No publishing is required to run these checks in the preview.
 
@@ -18,7 +18,7 @@ Use this checklist on the Lovable preview or the published URL. No publishing is
 
 - [ ] Open the website in a fresh tab
 - [ ] Click the Meta Pixel Helper extension icon
-- [ ] Confirm it shows **one** pixel with ID `1783200566262940`
+- [ ] Confirm it shows **one** pixel with ID `1572298120852523`
 - [ ] Confirm a **PageView** event is listed (green)
 - [ ] Confirm the pixel appears **only once** (no duplicates)
 - [ ] Navigate between sections (Home, About, Skills, Projects, etc.) — these are same-page scrolls, so no extra PageView is expected
