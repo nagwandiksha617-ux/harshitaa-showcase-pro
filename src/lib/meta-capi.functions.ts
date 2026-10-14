@@ -52,7 +52,8 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
     // Test Events code comes from the server secret only. A visitor (or the
     // page) can neither read it nor set it.
     const rawCode = (process.env["META_TEST_EVENT_CODE"] ?? "").trim();
-    const testEventCode = /^TEST[A-Z0-9]{1,20}$/i.test(rawCode) ? rawCode : undefined;
+    // Meta issues codes like "TEST-759184157147951-1", so hyphens must be allowed.
+    const testEventCode = /^TEST[A-Z0-9-]{1,40}$/i.test(rawCode) ? rawCode : undefined;
 
     const clientIp =
       getRequestHeader("cf-connecting-ip") ??
