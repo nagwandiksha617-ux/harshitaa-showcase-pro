@@ -195,6 +195,9 @@ function InquiryForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [success, setSuccess] = useState(false);
   const [utm, setUtm] = useState<Record<string, string>>({});
+  // Marketing/analytics consent. The Meta browser and server Lead events
+  // fire only when the visitor has opted in.
+  const [consent, setConsent] = useState(false);
   // Guards against firing the Meta Pixel Lead event more than once for the
   // same successful submission.
   const leadFiredRef = useRef(false);
@@ -245,7 +248,7 @@ function InquiryForm() {
       // successfully sent to the Google Apps Script endpoint — never on
       // validation errors, failed sends, or button clicks. The ref ensures a
       // single successful inquiry can never fire it twice.
-      if (!leadFiredRef.current) {
+      if (consent && !leadFiredRef.current) {
         leadFiredRef.current = true;
         // One shared event ID for the browser and server Lead events so Meta
         // deduplicates them.
@@ -315,6 +318,20 @@ function InquiryForm() {
       {UTM_KEYS.map((k) => (
         <input key={k} type="hidden" name={k} value={utm[k] ?? ""} readOnly />
       ))}
+      <div className="flex items-start gap-3 rounded-xl border border-white/15 bg-white/5 p-4">
+        <input
+          id="marketing_consent"
+          name="marketing_consent"
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[#38bdf8]"
+        />
+        <Label htmlFor="marketing_consent" className="cursor-pointer text-xs leading-relaxed text-white/70">
+          I agree that my inquiry may be used to respond to me and for anonymous marketing measurement
+          (Meta Pixel). Optional — your inquiry is sent either way.
+        </Label>
+      </div>
       <Button type="submit" size="lg" disabled={sending} className="w-full rounded-full">
         {sending ? "Sending…" : "Send Inquiry"}
       </Button>
