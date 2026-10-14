@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeader } from "@tanstack/react-start/server";
 
 const META_PIXEL_ID = "1572298120852523";
 
@@ -48,6 +49,9 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
       // CAPI intentionally disabled until the secret is configured.
       return { sent: false, reason: "capi_not_configured" as const };
     }
+    const clientIp =
+      getRequestHeader("cf-connecting-ip") ??
+      getRequestHeader("x-forwarded-for")?.split(",")[0]?.trim();
 
     const response = await fetch(
       `https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${encodeURIComponent(token)}`,
@@ -63,6 +67,7 @@ export const sendMetaLeadEvent = createServerFn({ method: "POST" })
               action_source: "website",
               event_source_url: data.eventSourceUrl,
               user_data: {
+                ...(clientIp ? { client_ip_address: clientIp } : {}),
                 ...(data.clientUserAgent
                   ? { client_user_agent: data.clientUserAgent }
                   : {}),
