@@ -266,16 +266,6 @@ function InquiryForm() {
             clientUserAgent: navigator.userAgent,
             ...(fbp ? { fbp } : {}),
             ...(fbc ? { fbc } : {}),
-            ...(import.meta.env.DEV
-              ? (() => {
-                  try {
-                    const t = window.localStorage.getItem("meta_test_event_code");
-                    return t ? { testEventCode: t } : {};
-                  } catch {
-                    return {};
-                  }
-                })()
-              : {}),
           },
         }).catch(() => {});
       }
